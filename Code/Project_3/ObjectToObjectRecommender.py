@@ -47,8 +47,14 @@ class ObjectToObjectRecommender:
         return list(set(common_objects))
     
     def add_actor(self, new_actor_list):
-        new_id = len(self.objects_by_actor) + 1
+        new_id = max(self.objects_by_actor, key = self.objects_by_actor.get) + 1
         self.objects_by_actor[new_id] = new_actor_list
+        
+        for object in new_actor_list:
+            self.actors_by_object[object] += [new_id]
+            
+        self.object_ids += new_actor_list
+        self.actor_ids += [new_id]
         
         return new_id
 
