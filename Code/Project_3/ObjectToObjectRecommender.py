@@ -45,7 +45,12 @@ class ObjectToObjectRecommender:
             common_objects.extend(self.objects_by_actor[actor])
         
         return list(set(common_objects))
-
+    
+    def add_actor(self, new_actor_list):
+        new_id = len(self.objects_by_actor) + 1
+        self.objects_by_actor[new_id] = new_actor_list
+        
+        return new_id
 
     def get_sims(self, object_id):
         can_list = self.get_canidates(object_id)
